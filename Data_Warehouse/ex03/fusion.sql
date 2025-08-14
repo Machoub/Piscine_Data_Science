@@ -10,5 +10,3 @@ SET
     brand = i.brand
 FROM item i
 WHERE c.product_id = i.product_id;
-
-
