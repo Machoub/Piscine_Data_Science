@@ -8,7 +8,7 @@ PGHOST=localhost
 export PGPASSWORD=mysecretpassword
 
 # Parcourt tous les CSV visibles dans le conteneur
-mapfile -t files < <(docker exec "$CONTAINER" sh -lc 'ls /data/*.csv 2>/dev/null')
+mapfile -t files < <(docker exec "$CONTAINER" sh -lc 'ls /data/customer/*.csv 2>/dev/null')
 
 for path in "${files[@]}"; do
   base=$(docker exec "$CONTAINER" sh -lc "basename '$path'")
