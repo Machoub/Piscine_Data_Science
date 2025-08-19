@@ -38,7 +38,6 @@ try:
     x_labels = ["oct", "nov", "dec", "jan"]
     plt.xticks(tick_positions, x_labels)
     plt.xlim([min(dates), max(dates)])
-
     plt.tight_layout()
     plt.show()
 
