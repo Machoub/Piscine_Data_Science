@@ -15,6 +15,7 @@ for path in "${files[@]}"; do
   table="${base%.csv}"
   echo "Create/Load $table"
 
+  # Créer la table d'abord
   docker exec "$CONTAINER" psql -U "$PGUSER" -d "$PGDB" -h "$PGHOST" -v ON_ERROR_STOP=1 -c "
     DROP TABLE IF EXISTS $table;
     CREATE TABLE $table (
@@ -25,7 +26,8 @@ for path in "${files[@]}"; do
       user_id      bigint,                   -- 5
       user_session uuid                      -- 6 (remplacer par text si nécessaire)
     );
-    COPY $table (event_time,event_type,product_id,price,user_id,user_session)
-    FROM '/data/customer/$base' WITH (FORMAT csv, HEADER true, NULL '');
   "
+  
+  # Utiliser \copy via stdin pour charger les données
+  echo "\copy $table (event_time,event_type,product_id,price,user_id,user_session) FROM '/data/customer/$base' WITH (FORMAT csv, HEADER true, NULL '');" | docker exec -i "$CONTAINER" psql -U "$PGUSER" -d "$PGDB" -h "$PGHOST" -v ON_ERROR_STOP=1
 done

@@ -10,7 +10,7 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - "/home/machouba/Téléchargements/subject:/data:ro"
+      - "/home/machouba/sgoinfre/subject:/data:ro"
   pgadmin:
     container_name: pgadmin_container
     image: dpage/pgadmin4
