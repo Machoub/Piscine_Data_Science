@@ -20,14 +20,14 @@ try:
     cursor.close()
     conn.close()
     print("Connection closed")
+    
     ks = []
-    for k in range(1, 20):
-        KM = KMeans(n_clusters=k, n_init=10, random_state=0).fit(data)
-
+    for k in range(1, 11):
+        KM = KMeans(n_clusters=k, n_init=10, random_state=42).fit(data)
         ks.append(KM.inertia_)
 
 
-    plt.plot(range(1, 20), ks, marker='o')
+    plt.plot(range(1, 11), ks, marker='o')
     plt.xlabel("Number of clusters")
     plt.title("The Elbow Method")
     plt.show()

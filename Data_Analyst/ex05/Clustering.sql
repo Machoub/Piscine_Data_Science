@@ -1,4 +1,4 @@
-SELECT
+/* SELECT
     CASE
         WHEN purchase_months = 4 THEN 'loyal platinum'
         WHEN purchase_months = 3 THEN 'loyal gold'
@@ -17,4 +17,12 @@ FROM (
     GROUP BY user_id
 ) AS purchase_counts
 GROUP BY purchase_months_category
-ORDER BY customer_count;
+ORDER BY customer_count; */
+
+SELECT 
+    user_id,
+    COUNT(*) AS nbr_achats
+FROM customers
+WHERE event_type = 'purchase'
+GROUP BY user_id
+ORDER BY nbr_achats DESC;
